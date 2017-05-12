@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
@@ -41,11 +43,25 @@ public class PasswordGenerator extends JFrame
         JTextField entry = new JTextField();
         entry.setColumns(20);
         entry.setText("Password length: ");
+        entry.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                entry.setText("");
+            }
+        });
         
         JTextField entry2 = new JTextField();
-        entry2.setColumns(20);
+        entry2.setColumns(22);
         entry2.setText("Password name: ");
-        
+        entry2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                entry2.setText("");
+            }
+        });
+
         JTextArea textArea = new JTextArea();
         textArea.setColumns(40);
         textArea.setLineWrap(true);
@@ -152,10 +168,8 @@ public class PasswordGenerator extends JFrame
         try {
             FileWriter writer = new FileWriter("passwords.txt", true);
             writer.append(name + ": " + psswd + System.lineSeparator());
-            //writer.append( );
             writer.close();
         } catch (IOException e) {
-           // do something
             System.out.println("asd");
         }
     }
